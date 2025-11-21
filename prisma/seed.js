@@ -1,4 +1,11 @@
-import prisma from '../src/lib/prisma';
+/**
+ * prisma/seed.js
+ * Plain JS seed to avoid ts-node ESM issues.
+ * author: Aftab
+ */
+
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 
 async function main() {
   await prisma.link.upsert({
@@ -16,7 +23,7 @@ async function main() {
     where: { code: 'github1' },
     update: {},
     create: {
-      code: 'github1', // 7 chars — matches /^[A-Za-z0-9]{6,8}$/
+      code: 'github1',
       target: 'https://github.com',
       clicks: 5,
     },
